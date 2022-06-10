@@ -5,8 +5,8 @@ services:
     image: nginx:stable-alpine
     container_name: nginx
     volumes:
-      - ./nginx/templates:/etc/nginx/templates
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./infra/templates:/etc/nginx/templates
+      - ./infra/nginx.conf:/etc/nginx/nginx.conf:ro
     environment:
       - NGINX_PORT=${NGINX_PORT}
       - BACKEND_PORT=${BACKEND_PORT}
@@ -55,7 +55,7 @@ services:
     ports:
       - ${POSTGRES_DB_PORT}:${POSTGRES_DB_PORT}
     volumes:
-      - ./pgdata/data:/var/lib/postgresql/data
+      - postgres:/var/lib/postgresql/data
 
   pgweb:
     restart: always
@@ -65,9 +65,12 @@ services:
     networks:
       - backend
     environment:
-      - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:${POSTGRES_DB_PORT}/${POSTGRES_DB_NAME}?sslmode=disable
+      - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:${POSTGRES_DB_PORT}/${POSTGRES_DB_PREFIX}_${POSTGRES_DB_NAME}?sslmode=disable
     depends_on:
       - postgres
 
 networks:
   backend:
+
+volumes:
+  postgres:
