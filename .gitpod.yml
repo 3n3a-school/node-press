@@ -5,19 +5,17 @@ tasks:
 
   - name: backend
     init: >
-      cd backend &&
+      cd ./backend &&
       npm i
     command: >
-      cd backend &&
       npm run start:dev &&
       gp await-port 3000
 
   - name: frontend
     init: >
-      cd frontend &&
+      cd ./frontend &&
       npm i
     command: >
-      cd frontend &&
       npm run start &&
       gp await-port 4200
       
@@ -27,3 +25,8 @@ ports:
     onOpen: open-browser
   - port: 4200
     onOpen: open-browser
+
+github:
+  prebuilds:
+    master: true
+    branches: true
