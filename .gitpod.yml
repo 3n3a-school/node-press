@@ -8,6 +8,7 @@ tasks:
       cd backend &&
       npm i
     command: >
+      cd backend &&
       npm run start:dev &&
       gp await-port 3000
 
@@ -16,6 +17,7 @@ tasks:
       cd frontend &&
       npm i
     command: >
+      cd frontend &&
       npm run start &&
       gp await-port 4200
       
