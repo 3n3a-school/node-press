@@ -12,7 +12,7 @@ import { Jwt } from '../models/jwt';
 export class AuthService {
 
   STORE_KEY = "nodepress-auth"
-  BACKEND_BASE_URL = "https://3000-3n3aschool-nodepress-honugtyedg2.ws-eu47.gitpod.io"
+  BACKEND_BASE_URL = "http://localhost:3000"
   token?: Jwt
 
   constructor(
