@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { catchError, retry, tap, shareReplay } from 'rxjs/operators';
 
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -24,11 +26,22 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     const user: User = {username: this.loginForm.value.username || "", password: this.loginForm.value.password || ""}
-    if (this.authService.login(user)) {
-      this.router.navigate(['home'])
-    } else {
-      this.router.navigate([''])
-    }
+    this.authService.login(user)
+        .pipe(
+        catchError(
+          error => {
+            console.error(error)
+            this.router.navigateByUrl("/login")
+            return of([])
+          }
+        )
+        
+      )
+      .subscribe(
+        async () => {          
+          await this.router.navigateByUrl("/home")
+        }
+      )
   }
 
 }
