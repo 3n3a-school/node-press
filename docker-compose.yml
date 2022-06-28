@@ -1,51 +1,51 @@
 version: '3'
 
 services:
-  front:
-    container_name: "node_press_front_${NODE_ENV}"
-    image: "node_press_front_${NODE_ENV}"
-    depends_on:
-      - postgres
-    environment:
-      - NODE_ENV:${NODE_ENV}
-    build:
-      context: ./frontend
-      target: "${NODE_ENV}"
-      dockerfile: Dockerfile
-    entrypoint: ["npm", "run", "start:${NODE_ENV}"]
-    env_file:
-      - .env
-    ports:
-      - ${BACKEND_PORT}:3000
-    networks:
-      - backend
-    volumes:
-      - ./backend:/usr/src/app
-      - /usr/src/app/node_modules
-    restart: unless-stopped
+  # front:
+  #   container_name: "node_press_front_${NODE_ENV}"
+  #   image: "node_press_front_${NODE_ENV}"
+  #   depends_on:
+  #     - postgres
+  #   environment:
+  #     - NODE_ENV:${NODE_ENV}
+  #   build:
+  #     context: ./frontend
+  #     target: "${NODE_ENV}"
+  #     dockerfile: Dockerfile
+  #   entrypoint: ["npm", "run", "start:${NODE_ENV}"]
+  #   env_file:
+  #     - .env
+  #   ports:
+  #     - ${BACKEND_PORT}:3000
+  #   networks:
+  #     - backend
+  #   volumes:
+  #     - ./backend:/usr/src/app
+  #     - /usr/src/app/node_modules
+  #   restart: unless-stopped
 
-  api:
-    container_name: "node_press_${NODE_ENV}"
-    image: "node_press_${NODE_ENV}"
-    depends_on:
-      - postgres
-    environment:
-      - NODE_ENV:${NODE_ENV}
-    build:
-      context: ./backend
-      target: "${NODE_ENV}"
-      dockerfile: Dockerfile
-    entrypoint: ["npm", "run", "start:${NODE_ENV}"]
-    env_file:
-      - .env
-    ports:
-      - ${BACKEND_PORT}:3000
-    networks:
-      - backend
-    volumes:
-      - ./backend:/usr/src/app
-      - /usr/src/app/node_modules
-    restart: unless-stopped
+  # api:
+  #   container_name: "node_press_${NODE_ENV}"
+  #   image: "node_press_${NODE_ENV}"
+  #   depends_on:
+  #     - postgres
+  #   environment:
+  #     - NODE_ENV:${NODE_ENV}
+  #   build:
+  #     context: ./backend
+  #     target: "${NODE_ENV}"
+  #     dockerfile: Dockerfile
+  #   entrypoint: ["npm", "run", "start:${NODE_ENV}"]
+  #   env_file:
+  #     - .env
+  #   ports:
+  #     - ${BACKEND_PORT}:3000
+  #   networks:
+  #     - backend
+  #   volumes:
+  #     - ./backend:/usr/src/app
+  #     - /usr/src/app/node_modules
+  #   restart: unless-stopped
 
   postgres:
     container_name: "node_press_postgres"
@@ -66,7 +66,7 @@ services:
     restart: always
     image: sosedoff/pgweb
     ports: 
-      - "8081:8081" 
+      - "8082:8081" 
     networks:
       - backend
     environment:
