@@ -19,7 +19,7 @@ export class AuthService {
     // TODO: implement login function
     const success = true
     const token = "ldjfdskfjdlfj"
-    if (success) {
+    if (success && user.username != "" && user.password != "") {
       localStorage.setItem(this.STORE_KEY, token)
     } else {
       localStorage.setItem(this.STORE_KEY, "")
@@ -31,7 +31,7 @@ export class AuthService {
     // TODO: implement register function
     const success = true
     const token = "ldfjdlfk"
-    if (success) {
+    if (success && user.username != "" && user.password != "") {
       localStorage.setItem(this.STORE_KEY, token)
     } else {
       localStorage.setItem(this.STORE_KEY, "")

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { FormGroup, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { User } from 'src/app/models/user';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,13 +17,18 @@ export class LoginComponent implements OnInit {
     password: new FormControl(''),
   })
 
-  constructor() { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   onSubmit() {
-    window.alert(`u: ${this.loginForm.value.username} p: ${this.loginForm.value.password}`)
+    const user: User = {username: this.loginForm.value.username || "", password: this.loginForm.value.password || ""}
+    if (this.authService.login(user)) {
+      this.router.navigate(['home'])
+    } else {
+      this.router.navigate([''])
+    }
   }
 
 }
