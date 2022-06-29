@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/user';
 import { Jwt } from '../models/jwt';
 import { Router } from '@angular/router';
+import * as dayjs from 'dayjs';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,10 @@ export class AuthService {
 
   isLoggedIn() {
     const authKey = localStorage.getItem("nodepress-auth")
-    return authKey != null && authKey != ""
+    const authExpiry = localStorage.getItem("nodepress-expires")
+    console.log(`Token expires in ${dayjs(authExpiry).diff(dayjs(), 'minutes')}m`);
+    
+    return authKey != null && authKey != "" && dayjs(authExpiry).isAfter(dayjs())
   }
 
   login(user: User) {
@@ -48,5 +52,6 @@ export class AuthService {
 
   private setSession(authRes: Jwt) {    
     localStorage.setItem("nodepress-auth", authRes.access_token)
+    localStorage.setItem("nodepress-expires", authRes.expires)
   }
 }
