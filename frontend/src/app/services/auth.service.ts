@@ -47,6 +47,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem("nodepress-auth")
+    localStorage.removeItem("nodepress-expires")
     this.router.navigateByUrl("/login")
   }
 
