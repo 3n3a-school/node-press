@@ -1,20 +1,23 @@
 import { Component, OnInit } from '@angular/core';
+
 import { catchError, retry, tap, shareReplay } from 'rxjs/operators';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { of } from 'rxjs';
+import { Router } from '@angular/router';
+
+
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class RegisterComponent implements OnInit {
 
-  loginForm = new FormGroup({
+  registerForm = new FormGroup({
     username: new FormControl('',  [
       Validators.required,
       Validators.minLength(4)
@@ -29,20 +32,20 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  
-  get username() { return this.loginForm.get('username') }
 
-  get password() { return this.loginForm.get('password') }
+  get username() { return this.registerForm.get('username') }
+
+  get password() { return this.registerForm.get('password') }
 
   onSubmit() {
-    const user: User = {username: this.loginForm.value.username || "", password: this.loginForm.value.password || ""}
-    this.authService.login(user)
+    const user: User = {username: this.registerForm.value.username || "", password: this.registerForm.value.password || ""}
+    this.authService.register(user)
         .pipe(
         catchError(
           error => {
             console.error(error)
             window.alert(JSON.stringify(error))
-            this.router.navigateByUrl("/login")
+            this.router.navigateByUrl("/register")
             return of([])
           }
         )

@@ -7,15 +7,17 @@ import { AuthService } from './auth.service';
 export class AuthController {
     constructor(private authService: AuthService) {}
 
-    @UseGuards(LocalAuthGuard)
+     @UseGuards(LocalAuthGuard)
     @Post('login')
-    async login(@Request() req) {
-      return await this.authService.login(req.user)
+    async login(@Request() req) {    
+      return await this.authService.login(req.body)
     }
 
     @UseGuards(LocalAuthGuard)
     @Post('register')
     async register(@Request() req) {
+      console.log(req.user);
+      
       return await this.authService.register(req.user)
     }
 }

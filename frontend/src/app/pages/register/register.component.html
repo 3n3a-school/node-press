@@ -1,0 +1,33 @@
+<div>
+    <h1>
+        Register
+    </h1>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Username</mat-label>
+                <input matInput formControlName="username" required>
+                <mat-icon matSuffix>person</mat-icon>
+                <mat-hint>Username can only contain A-Z and a-z</mat-hint>
+                <mat-error *ngIf="username?.invalid && (username?.dirty || username?.touched)">
+                    Only letters, more than 4 characters
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" formControlName="password" required>
+                <mat-icon matSuffix>lock</mat-icon>
+                <mat-hint>Password has minimum length of 8 characters</mat-hint>
+                <mat-error *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+                    Minimum of 8 characters
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <button mat-raised-button color="accent" type="submit">
+            Register
+        </button>
+    </form>
+</div>
+

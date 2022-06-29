@@ -14,6 +14,7 @@ export class AppComponent {
 
   routes = [
     { path: 'login', title: 'Login' },
+    { path: 'register', title: 'Register' },
     { path: 'home', title: 'Home' },
   ]
 

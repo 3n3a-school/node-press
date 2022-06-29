@@ -20,6 +20,7 @@ import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { RegisterComponent } from './pages/register/register.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     AppComponent,
     LoginComponent,
     HomeComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
