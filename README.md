@@ -12,4 +12,4 @@ a project for m151
 * [Angular Router](https://angular.io/guide/router)
 * [Jira Board](https://3n3a.atlassian.net/jira/core/projects/MN/board)
 
-* [Sequelize Intergation into Nestjs](https://docs.nestjs.com/techniques/database#sequelize-integration
+* [Sequelize Intergation into Nestjs](https://docs.nestjs.com/techniques/database#sequelize-integration)
