@@ -14,7 +14,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getProfile() {
-    return this.http.get<User>(`${this.BACKEND_BASE_URL}/user/profile`)
+    return this.http.get<User>(`${this.BACKEND_BASE_URL}/users/profile`)
     .pipe(
       shareReplay()
     )
