@@ -1,22 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
+import { AsyncSubject, BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AuthService } from './services/auth.service';
+import { Route } from './models/route';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'NodePress';
+  isLoggedIn = this.authService.isLoggedIn
 
-  routes = [
+  loginPageRoutes: Route[] = [
     { path: 'login', title: 'Login' },
     { path: 'register', title: 'Register' },
+  ]
+
+  loggedInRoutes: Route[] = [
     { path: 'home', title: 'Home' },
   ]
+
+  routes = new BehaviorSubject(this.loginPageRoutes)
+
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -24,7 +32,20 @@ export class AppComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService,) {}
+  constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService,) {
+  }
+  
+  ngOnInit(): void {
+    const me = this
+    this.isLoggedIn.subscribe({
+      next(value) {
+        console.log(`New Login ${value}`);
+        
+        me.routes.next(value ? me.loggedInRoutes : me.loginPageRoutes)
+      }
+    })
+    this.authService.recheckLoggedIn()
+  }
 
   logout() {
     this.authService.logout()

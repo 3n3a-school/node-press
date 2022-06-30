@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Subject, throwError } from 'rxjs';
 import { catchError, retry, tap, shareReplay } from 'rxjs/operators';
 
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { User } from '../models/user';
 import { Jwt } from '../models/jwt';
 import { Router } from '@angular/router';
@@ -11,17 +11,23 @@ import * as dayjs from 'dayjs';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService implements OnInit {
 
   BACKEND_BASE_URL = "http://localhost:3000"
   token?: Jwt
+
+  isLoggedIn = new BehaviorSubject<boolean>(false)
 
   constructor(
     private http: HttpClient,
     private router: Router
   ) { }
 
-  isLoggedIn() {
+  ngOnInit(): void {
+    this.isLoggedIn.next(this.isLoggedIn$())
+  }
+
+  isLoggedIn$() {
     const authKey = localStorage.getItem("nodepress-auth")
     const authExpiry = localStorage.getItem("nodepress-expires")
     console.log(`Token expires in ${dayjs(authExpiry).diff(dayjs(), 'minutes')}m`);
@@ -49,6 +55,11 @@ export class AuthService {
     localStorage.removeItem("nodepress-auth")
     localStorage.removeItem("nodepress-expires")
     this.router.navigateByUrl("/login")
+    this.recheckLoggedIn()
+  }
+  
+  recheckLoggedIn() {
+    this.isLoggedIn.next(this.isLoggedIn$())
   }
 
   private setSession(authRes: Jwt) {    

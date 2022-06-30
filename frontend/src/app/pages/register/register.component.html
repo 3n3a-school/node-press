@@ -5,6 +5,28 @@
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <p>
             <mat-form-field appearance="outline">
+                <mat-label>First Name</mat-label>
+                <input matInput type="text" formControlName="firstName" required>
+                <mat-icon matSuffix>person</mat-icon>
+                <mat-hint>First Name has minimum length of 2 characters</mat-hint>
+                <mat-error *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)">
+                    Minimum of 2 characters
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Last Name</mat-label>
+                <input matInput type="text" formControlName="lastName" required>
+                <mat-icon matSuffix>person</mat-icon>
+                <mat-hint>Last Name has minimum length of 2 characters</mat-hint>
+                <mat-error *ngIf="lastName?.invalid && (lastName?.dirty || lastName?.touched)">
+                    Minimum of 2 characters
+                </mat-error>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
                 <mat-label>Username</mat-label>
                 <input matInput formControlName="username" required>
                 <mat-icon matSuffix>person</mat-icon>

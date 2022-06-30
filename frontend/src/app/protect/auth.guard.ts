@@ -13,7 +13,7 @@ export class AuthGuard implements CanActivate, CanLoad {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
     let customRedirect = route.data['authGuardRedirect'];
-    let isLoggedIn = this.authService.isLoggedIn()
+    let isLoggedIn = this.authService.isLoggedIn$()
 
     if (!isLoggedIn) {
       let redirect = !!customRedirect ? customRedirect : '/login'
@@ -26,6 +26,6 @@ export class AuthGuard implements CanActivate, CanLoad {
     route: Route,
     segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
-    return this.authService.isLoggedIn()
+    return this.authService.isLoggedIn$()
   }
 }

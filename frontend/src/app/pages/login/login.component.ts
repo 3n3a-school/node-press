@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    this.authService.logout()
   }
   
   get username() { return this.loginForm.get('username') }
@@ -50,6 +51,7 @@ export class LoginComponent implements OnInit {
       )
       .subscribe(
         async () => {          
+          this.authService.recheckLoggedIn()
           await this.router.navigateByUrl("/home")
         }
       )

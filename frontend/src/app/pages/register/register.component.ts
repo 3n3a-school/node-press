@@ -18,6 +18,14 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
 
   registerForm = new FormGroup({
+    firstName: new FormControl('',  [
+      Validators.required,
+      Validators.minLength(2)
+    ]),
+    lastName: new FormControl('',  [
+      Validators.required,
+      Validators.minLength(2)
+    ]),
     username: new FormControl('',  [
       Validators.required,
       Validators.minLength(4)
@@ -31,14 +39,24 @@ export class RegisterComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    this.authService.logout()
   }
 
   get username() { return this.registerForm.get('username') }
 
   get password() { return this.registerForm.get('password') }
 
+  get firstName() { return this.registerForm.get('firstName') }
+
+  get lastName() { return this.registerForm.get('lastName') }
+
   onSubmit() {
-    const user: User = {username: this.registerForm.value.username || "", password: this.registerForm.value.password || ""}
+    const user: User = {
+      firstName: this.registerForm.value.firstName || "", 
+      lastName: this.registerForm.value.lastName || "", 
+      username: this.registerForm.value.username || "", 
+      password: this.registerForm.value.password || ""
+    }
     this.authService.register(user)
         .pipe(
         catchError(
@@ -53,6 +71,7 @@ export class RegisterComponent implements OnInit {
       )
       .subscribe(
         async () => {          
+          this.authService.recheckLoggedIn()
           await this.router.navigateByUrl("/home")
         }
       )

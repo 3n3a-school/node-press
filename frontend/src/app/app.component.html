@@ -5,8 +5,8 @@
       [opened]="(isHandset$ | async) === false">
       <div class="flex-container">
         <mat-toolbar>Menu</mat-toolbar>
-        <mat-nav-list>
-          <a mat-list-item *ngFor="let route of routes" [routerLink]="[route.path]">
+        <mat-nav-list *ngIf="routes | async">
+          <a mat-list-item *ngFor="let route of routes | async" [routerLink]="[route.path]">
             {{
               route.title
             }}
@@ -15,7 +15,7 @@
         <div class="spacer-vertical">
 
         </div>
-        <mat-toolbar>
+        <mat-toolbar *ngIf="isLoggedIn | async">
           <button mat-flat-button color="primary" (click)="logout()">
             Logout
           </button>

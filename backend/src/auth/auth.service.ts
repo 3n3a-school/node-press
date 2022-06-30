@@ -24,8 +24,8 @@ export class AuthService {
     return null;
   }
 
-  async login(user: User) {
-    console.log(`Login user ${JSON.stringify(user)}`);
+  async login(user: UserDto) {
+    console.log(`New Login from user ${user.username}`);
     
     const payload = { sub: user.id, username: user.username  };
     return {
