@@ -1,0 +1,37 @@
+<h1 mat-dialog-title>{{ data.title }}</h1>
+<form [formGroup]="addPostForm">
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Title</mat-label>
+            <input matInput type="text" formControlName="title" required>
+            <mat-icon matSuffix>title</mat-icon>
+            <mat-hint>Title has minimum length of 4 characters</mat-hint>
+            <mat-error *ngIf="title?.invalid && (title?.dirty || title?.touched)">
+                Minimum of 4 characters
+            </mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <input matInput type="text" formControlName="description" required>
+            <mat-icon matSuffix>text</mat-icon>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Content</mat-label>
+            <textarea matInput formControlName="content" rows="5" required></textarea>
+            <mat-hint>Content has minimum length of 4 characters</mat-hint>
+            <mat-error *ngIf="content?.invalid && (content?.dirty || content?.touched)">
+                Minimum of 4 characters
+            </mat-error>
+        </mat-form-field>
+    </p>
+    <div mat-dialog-actions>
+        <button mat-raised-button (click)="onNoClick()">Cancel</button>
+        <button mat-raised-button color="accent" (click)="createPost()">
+            Add
+        </button>
+    </div>
+</form>

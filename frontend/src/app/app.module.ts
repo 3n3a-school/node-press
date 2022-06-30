@@ -23,6 +23,11 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { RegisterComponent } from './pages/register/register.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { MatCardModule } from "@angular/material/card";
+import { PostsComponent } from './pages/posts/posts.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule} from '@angular/material/snack-bar';
+import { AddPostDialogComponent } from './components/add-post-dialog/add-post-dialog.component';
+
 
 
 @NgModule({
@@ -32,6 +37,8 @@ import { MatCardModule } from "@angular/material/card";
     HomeComponent,
     RegisterComponent,
     ProfileComponent,
+    PostsComponent,
+    AddPostDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +55,8 @@ import { MatCardModule } from "@angular/material/card";
     MatInputModule,
     MatGridListModule,
     MatCardModule,
+    MatDialogModule,
+    MatSnackBarModule,
     BrowserAnimationsModule
   ],
   providers: [

@@ -13,10 +13,22 @@ export class PostsController {
   create(@Body() createPostDto: CreatePostDto) {
     return this.postsService.create(createPostDto);
   }
+  
+  @UseGuards(JwtAuthGuard)
+  @Get()
+  findAllAuthenticated() {
+    return this.postsService.findAllAuthenticated();
+  }
 
   @Get()
   findAll() {
     return this.postsService.findAll();
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('search')
+  findByQueryAuthenticated(@Query('q') query: string) {
+    return this.postsService.findAllByQueryAuthenticated(query)
   }
 
   @Get('search')

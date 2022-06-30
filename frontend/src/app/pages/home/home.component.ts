@@ -8,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 
   list = [
-    {path: "profile", title: "Profile"}
+    {path: "profile", title: "Profile"},
+    { path: 'posts', title: 'Posts' },
   ]
 
   constructor(

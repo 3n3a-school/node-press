@@ -1,0 +1,13 @@
+<div class="container">
+    <h1>Posts</h1>
+    <mat-toolbar>
+        <button mat-fab aria-label="Button that adds a post" (click)="openAddPost()">
+            <mat-icon>add</mat-icon>
+        </button>
+    </mat-toolbar>
+    <mat-action-list>
+        <button mat-list-item *ngFor="let post of postsList | async" (click)="openPost(post.id)">
+            {{ post.title }}
+        </button>
+    </mat-action-list>
+</div>

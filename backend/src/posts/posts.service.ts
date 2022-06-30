@@ -23,13 +23,32 @@ export class PostsService {
     return postData
   }
 
-  async findAll(): Promise<Post[]> {
+  async findAllAuthenticated(): Promise<Post[]> {
     return this.postModel.findAll()
+  }
+
+  async findAll(): Promise<Post[]> {
+    return this.postModel.findAll({
+      where: {
+        isPublished: true
+      }
+    })
+  }
+
+  async findAllByQueryAuthenticated(query: string) {
+    return this.postModel.findAll({
+      where: {
+        title: {
+          [Op.like]: `%${query}%` 
+        }
+      }
+    })
   }
   
   async findAllByQuery(query: string) {
     return this.postModel.findAll({
       where: {
+        isPublished: true,
         title: {
           [Op.like]: `%${query}%` 
         }
