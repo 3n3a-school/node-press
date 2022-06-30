@@ -1,2 +1,10 @@
-<p>home works!</p>
-<button (click)="testReq()">TEst</button>
+<div class="container">
+    <h1>Overview</h1>
+    <div class="container" *ngIf="list">
+        <a *ngFor="let item of list" [routerLink]="['..', item.path]">
+            <mat-card >
+                {{ item.title }}
+            </mat-card>
+        </a>
+    </div>
+</div>

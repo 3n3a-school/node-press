@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
 
   loggedInRoutes: Route[] = [
     { path: 'home', title: 'Home' },
+    { path: 'profile', title: 'Profile' },
   ]
 
   routes = new BehaviorSubject(this.loginPageRoutes)

@@ -51,10 +51,10 @@ export class AuthService implements OnInit {
       )
   }
 
-  logout() {
+  logout(redirectPath='login') {
     localStorage.removeItem("nodepress-auth")
     localStorage.removeItem("nodepress-expires")
-    this.router.navigateByUrl("/login")
+    this.router.navigate([redirectPath])
     this.recheckLoggedIn()
   }
   

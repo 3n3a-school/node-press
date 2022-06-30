@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -8,21 +7,14 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class HomeComponent implements OnInit {
 
+  list = [
+    {path: "profile", title: "Profile"}
+  ]
+
   constructor(
-    private userService: UserService
   ) { }
 
   ngOnInit(): void {
-  }
-
-
-  testReq() {
-    this.userService.getProfile()
-      .subscribe(
-        user => {
-          alert(JSON.stringify(user))
-        }
-      )
   }
 
 }

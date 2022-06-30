@@ -21,6 +21,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { RegisterComponent } from './pages/register/register.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { MatCardModule } from "@angular/material/card";
 
 
 @NgModule({
@@ -29,6 +31,7 @@ import { RegisterComponent } from './pages/register/register.component';
     LoginComponent,
     HomeComponent,
     RegisterComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,6 +47,7 @@ import { RegisterComponent } from './pages/register/register.component';
     MatFormFieldModule,
     MatInputModule,
     MatGridListModule,
+    MatCardModule,
     BrowserAnimationsModule
   ],
   providers: [

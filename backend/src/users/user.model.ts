@@ -18,7 +18,9 @@ export class User extends Model {
   @Column({ defaultValue: true })
   isActive: boolean;
 
-  @Column
+  @Column({
+    unique: true
+  })
   username: string;
 
   @Column
