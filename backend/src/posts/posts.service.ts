@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+import { Op } from 'sequelize';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { Post } from './post.model';
@@ -9,7 +10,7 @@ export class PostsService {
   constructor(
     @InjectModel(Post)
     private postModel: typeof Post,
-  )  {}
+  ) { }
 
   async create(createPostDto: CreatePostDto): Promise<Post> {
     const post = new Post()
@@ -24,6 +25,16 @@ export class PostsService {
 
   async findAll(): Promise<Post[]> {
     return this.postModel.findAll()
+  }
+  
+  async findAllByQuery(query: string) {
+    return this.postModel.findAll({
+      where: {
+        title: {
+          [Op.like]: `%${query}%` 
+        }
+      }
+    })
   }
 
   findOne(id: string) {
