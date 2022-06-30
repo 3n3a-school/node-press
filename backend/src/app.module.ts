@@ -6,6 +6,7 @@ import { UsersModule } from './users/users.module';
 
 import { SequelizeModule } from '@nestjs/sequelize';
 import { User } from './users/user.model';
+import { PostsModule } from './posts/posts.module';
 
 @Module({
   imports: [AuthModule, UsersModule, SequelizeModule.forRoot({
@@ -17,7 +18,7 @@ import { User } from './users/user.model';
     database: 'nodepress',
     autoLoadModels: true,
     synchronize: true,
-  })],
+  }), PostsModule],
   controllers: [AppController],
   providers: [AppService],
 })
