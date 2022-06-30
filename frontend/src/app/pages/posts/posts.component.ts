@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { BehaviorSubject } from 'rxjs';
 import { AddPostDialogComponent } from 'src/app/components/add-post-dialog/add-post-dialog.component';
 import { Post } from 'src/app/models/post';
@@ -15,7 +16,7 @@ export class PostsComponent implements OnInit {
 
   postsList = new BehaviorSubject<Post[]>([])
 
-  constructor(private postService: PostService, public dialog: MatDialog) { }
+  constructor(private postService: PostService, public dialog: MatDialog, private snackbar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.getNewPosts()
@@ -32,6 +33,15 @@ export class PostsComponent implements OnInit {
 
   openPost(id: any) {
     alert(`${id}`)
+  }
+
+  async deletePost(id: any) {
+    this.postService.deletePost(id)
+      .subscribe(
+        () => {
+          this.snackbar.open("Deleted post", "Ok")
+        }
+      )
   }
 
 

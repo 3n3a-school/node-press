@@ -15,7 +15,7 @@ export class Post extends Model {
   @Column
   description: string;
 
-  @Column({ defaultValue: true })
+  @Column({ defaultValue: false })
   isPublished: boolean;
 
   @Column({

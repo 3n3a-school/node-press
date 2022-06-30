@@ -15,7 +15,7 @@ export class PostsController {
   }
   
   @UseGuards(JwtAuthGuard)
-  @Get()
+  @Get('A')
   findAllAuthenticated() {
     return this.postsService.findAllAuthenticated();
   }
@@ -26,7 +26,7 @@ export class PostsController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('search')
+  @Get('search/A')
   findByQueryAuthenticated(@Query('q') query: string) {
     return this.postsService.findAllByQueryAuthenticated(query)
   }
