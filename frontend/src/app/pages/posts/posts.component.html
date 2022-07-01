@@ -7,7 +7,7 @@
     </mat-toolbar>
     <mat-action-list>
         <mat-list-item *ngFor="let post of postsList | async">
-            <button mat-list-item  (click)="openPost(post.id)">
+            <button mat-list-item  (click)="openPost(post)">
                 {{ post.title }}
             </button>
             <button mat-icon-button color="warn" (click)="deletePost(post.id)">

@@ -27,4 +27,4 @@ import { RolesGuard } from './roles/roles.guard';
     useClass: RolesGuard,
   }, Logger],
 })
-export class AppModule {}
+export class AppModule { }

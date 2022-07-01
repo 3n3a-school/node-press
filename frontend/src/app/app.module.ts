@@ -27,6 +27,7 @@ import { PostsComponent } from './pages/posts/posts.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
 import { AddPostDialogComponent } from './components/add-post-dialog/add-post-dialog.component';
+import { PostDetailComponent } from './components/post-detail/post-detail.component';
 
 
 
@@ -38,7 +39,8 @@ import { AddPostDialogComponent } from './components/add-post-dialog/add-post-di
     RegisterComponent,
     ProfileComponent,
     PostsComponent,
-    AddPostDialogComponent
+    AddPostDialogComponent,
+    PostDetailComponent
   ],
   imports: [
     BrowserModule,
