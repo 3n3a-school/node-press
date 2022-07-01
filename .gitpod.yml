@@ -3,6 +3,10 @@ tasks:
   - before: |
       cp sample.env .env
 
+  - name: database
+    command: >
+      docker-compose up -d
+
   - name: backend
     init: >
       cd ./backend &&
