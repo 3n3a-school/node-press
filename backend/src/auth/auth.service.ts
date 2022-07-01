@@ -8,7 +8,7 @@ import { UserDto } from 'src/users/dto/user.dto';
 
 @Injectable()
 export class AuthService {
-  constructor(private usersService: UsersService, private jwtService: JwtService, private readonly logger: Logger) {}
+  constructor(private usersService: UsersService, private jwtService: JwtService) {}
 
   async validateUser(username: string, pass: string): Promise<any> {
     const user = await this.usersService.findOneByUsername(username);
@@ -25,7 +25,7 @@ export class AuthService {
   }
 
   async login(user: UserDto) {
-    this.logger.log(`New Login from user ${user.username}`);
+    console.log(`New Login from user ${user.username}`);
     
     const payload = { sub: user.id, username: user.username  };
     return {
@@ -36,7 +36,7 @@ export class AuthService {
 
   async register(user: UserDto) {
     const newUser = await this.usersService.createOne(user)
-    this.logger.log(`New User with username ${newUser.username}`);
+    console.log(`New User with username ${newUser.username}`);
     
     
     const payload = {  sub: newUser.id, username: newUser.username }
