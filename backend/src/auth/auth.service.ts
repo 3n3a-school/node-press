@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import * as dayjs from 'dayjs';
@@ -8,7 +8,7 @@ import { UserDto } from 'src/users/dto/user.dto';
 
 @Injectable()
 export class AuthService {
-  constructor(private usersService: UsersService, private jwtService: JwtService) {}
+  constructor(private usersService: UsersService, private jwtService: JwtService, private readonly logger: Logger) {}
 
   async validateUser(username: string, pass: string): Promise<any> {
     const user = await this.usersService.findOneByUsername(username);
@@ -25,7 +25,7 @@ export class AuthService {
   }
 
   async login(user: UserDto) {
-    console.log(`New Login from user ${user.username}`);
+    this.logger.log(`New Login from user ${user.username}`);
     
     const payload = { sub: user.id, username: user.username  };
     return {
@@ -36,7 +36,7 @@ export class AuthService {
 
   async register(user: UserDto) {
     const newUser = await this.usersService.createOne(user)
-    console.log(`New User with username ${newUser.username}`);
+    this.logger.log(`New User with username ${newUser.username}`);
     
     
     const payload = {  sub: newUser.id, username: newUser.username }
