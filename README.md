@@ -4,6 +4,26 @@ a project for m151
 
 [Open in Gitpod 🚀](https://gitpod.io/#prebuild/https://github.com/3n3a-school/node-press)
 
+## Usage
+
+### Frontend
+
+1. Go into Frontend Folder and run `npm install`
+2. Now run `npm start`
+3. Application should be ready on Port :4200
+
+### Backend
+
+1. Go into Backend Folder and run `npm install`
+2. Now run `npm run start:dev`
+3. Backend should be running on Port :3000
+
+### Database
+
+1. Start with `docker-compose up -d`
+2. Database Managment UI runs on Port :8082
+
+
 ## Notes
 
 * [Angular Reactive Forms](https://angular.io/guide/reactive-forms#grouping-form-controls)
